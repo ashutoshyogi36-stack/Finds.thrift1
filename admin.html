@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>finds.thrift1 — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+body{background:#f4f1ea;color:#111}.admin-wrap{max-width:1050px;margin:0 auto;padding:24px 18px 60px}.admin-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:20px}.admin-brand{font-family:"Playfair Display",serif;font-size:28px}.admin-card{background:#fff;border:1px solid #ddd8cf;padding:20px;margin:14px 0}.admin-card h2{margin-top:0}.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.admin-grid .full{grid-column:1/-1}.admin-card input,.admin-card select,.admin-card textarea{width:100%;padding:12px;border:1px solid #cfc9bf;background:#fff;font:inherit}.admin-card textarea{min-height:100px;resize:vertical}.admin-btn{border:0;padding:12px 16px;background:#111;color:#fff;font-weight:700;cursor:pointer}.admin-btn.alt{background:#e8e3d9;color:#111}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.notice{padding:12px;background:#f1eee7;margin:10px 0}.product-row{display:grid;grid-template-columns:80px 1fr auto;gap:12px;align-items:center;border-top:1px solid #ddd8cf;padding:12px 0}.product-row img{width:80px;height:95px;object-fit:cover}.muted{opacity:.65;font-size:.9rem}.hidden{display:none!important}@media(max-width:650px){.admin-grid{grid-template-columns:1fr}.admin-grid .full{grid-column:auto}.product-row{grid-template-columns:60px 1fr}.product-row .row{grid-column:1/-1}.product-row img{width:60px;height:70px}.admin-top{align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="admin-wrap">
+  <div class="admin-top"><div class="admin-brand">finds.thrift1 <span class="muted">ADMIN</span></div><div class="row"><a class="admin-btn alt" href="index.html">View store</a><button class="admin-btn alt" id="logoutBtn">Logout</button></div></div>
+
+  <section id="loginCard" class="admin-card">
+    <h2>Admin Login</h2><p class="muted">Use the store owner's Supabase email and password.</p>
+    <form id="loginForm" class="admin-grid">
+      <input class="full" id="loginEmail" type="email" placeholder="Email" required>
+      <input class="full" id="loginPassword" type="password" placeholder="Password" required>
+      <button class="admin-btn full">LOGIN</button>
+    </form>
+    <div id="loginMsg" class="notice hidden"></div>
+  </section>
+
+  <div id="dashboard" class="hidden">
+    <section class="admin-card">
+      <h2 id="formTitle">Add Product</h2>
+      <form id="productForm" class="admin-grid">
+        <input type="hidden" id="productId">
+        <input id="pName" placeholder="Product name" required>
+        <input id="pPrice" type="number" min="0" placeholder="Price ₹" required>
+        <input id="pCategory" placeholder="Category (T-Shirts, Jackets...)" required>
+        <input id="pSize" placeholder="Size (S/M/L/XL)">
+        <input id="pCondition" placeholder="Condition (Excellent/Good)">
+        <input id="pStock" type="number" min="0" placeholder="Stock" value="1" required>
+        <input class="full" id="pImage" type="file" accept="image/*">
+        <input class="full" id="pImageUrl" placeholder="Or paste image URL (optional)">
+        <textarea class="full" id="pDescription" placeholder="Description"></textarea>
+        <div class="row full"><button class="admin-btn" id="saveProductBtn">SAVE PRODUCT</button><button type="button" class="admin-btn alt" id="cancelEditBtn">CLEAR</button></div>
+      </form>
+      <div id="productMsg" class="notice hidden"></div>
+    </section>
+
+    <section class="admin-card">
+      <h2>Products</h2>
+      <div id="productList">Loading...</div>
+    </section>
+
+    <section class="admin-card">
+      <h2>Store Settings</h2>
+      <form id="settingsForm" class="admin-grid">
+        <input class="full" id="sWhatsapp" placeholder="WhatsApp number with country code, e.g. 919876543210">
+        <input id="sInstagram" placeholder="Instagram URL">
+        <input id="sEmail" type="email" placeholder="Store email">
+        <textarea class="full" id="sShipping" placeholder="Shipping policy"></textarea>
+        <textarea class="full" id="sReturn" placeholder="Return/exchange policy"></textarea>
+        <textarea class="full" id="sAbout" placeholder="About the store"></textarea>
+        <button class="admin-btn full">SAVE SETTINGS</button>
+      </form>
+      <div id="settingsMsg" class="notice hidden"></div>
+    </section>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="admin.js"></script>
+</body>
+</html>
